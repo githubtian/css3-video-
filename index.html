@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>R式卡牌绝世武神</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <link href="css/main.css?r=23" rel="stylesheet" /> 
+    <script src="http://s.gyyx.cn/Lib/jquery.js"></script>   
+</head>
+
+<body>
+    <!--load-->
+    <section class="load_wrap js_load">
+          <h2 class="load_percent" id="progress">0%</h2>
+          <h3 class="load_tip">《光宇游戏》建议您在WiFi环境下浏览</h3>
+    </section>
+    <!--swiper-->
+    <div class="global hide">
+        <div class="layout layout1">
+            <!--<img src="image/page01_bg.jpg" id="image"/>-->
+            <div class=" video js_video">
+                <video id="movie" preload="auto" poster="image/page01_bg.jpg" x-webkit-airplay="true" webkit-playsinline="true" style="width:100%; outline:none; vertical-align:baseline;">
+                    <source type="video/mp4" src="image/movie.mp4"/>
+                </video>
+            </div>
+            <div class="box js_show" style="position:absolute;left:0;top:0;z-index:2;">
+                <img src="image/page01_bg.jpg" id="image"/>
+                <div class="img img4"></div>
+                <div class="img hit1 hide"></div>
+                <div class="img hit2 hide"></div>
+                <div class="img hit3 hide"></div>
+                <div class="img img3 js_click"></div>
+            </div>       
+            <div class="box">
+                <div class="img img6"></div>
+                <div class="img img7"></div>
+                <div class="img img8"></div>
+                <div class="img img9"></div>
+                <div class="img img10 js_videoBtn"></div>
+                <div class="img arrow"></div>
+            </div>
+            <div class="img img1" style="position:absolute;z-index:3;"></div>              
+        </div>
+        <div class="layout layout2">
+            <div class="img role"></div>
+            <div class="img word"></div>
+            <div class=" video" style="opacity:1;">
+                <video id="movie1" preload="auto" loop="loop" x-webkit-airplay="true" webkit-playsinline="true">
+                    <source type="video/mp4" src="image/movie2.mp4"/>
+                </video>
+            </div>
+            <div class="img arrow"></div> 
+        </div>
+        <div class="layout layout3">
+            <div class="img role"></div>
+            <div class="img word"></div>
+            <div class=" video" style="opacity:1;">
+                <video id="movie2" preload="auto" loop="loop" x-webkit-airplay="true" webkit-playsinline="true">
+                    <source type="video/mp4" src="image/movie3.mp4"/>
+                </video>
+            </div>
+            <div class="img arrow"></div> 
+        </div>
+        <div class="layout layout4">
+            <div class="img role"></div>
+            <div class="img word"></div>
+            <div class=" video" style="opacity:1;">
+                <video id="movie3" preload="auto" loop="loop" x-webkit-airplay="true" webkit-playsinline="true">
+                    <source type="video/mp4" src="image/movie4.mp4"/>
+                </video>
+            </div>
+            <div class="img arrow"></div> 
+        </div>
+        <div class="layout layout5">
+            <div class="img word">
+                <img src="image/page05_word.png" />
+            </div>
+            <input type="button" class="img btn js_submit" />
+        </div>
+    </div>
+    <div class="video_box js_video">
+        <a href="javascript:;" class="close">×</a>
+        <div class="video_con">
+            <iframe frameborder="0" width="100%" height="auto" src="http://v.qq.com/iframe/player.html?vid=s018552t6sx&tiny=0&auto=0" allowfullscreen></iframe>
+        </div>
+        
+    </div>
+    <div class="landscapes">请在竖屏使用！</div>
+    <audio src="image/hit.mp3" id="hit_sound" preload=""></audio>
+    <audio src="image/bg.mp3" id="bg_sound" preload="" loop="loop"></audio>
+    <audio src="image/submit.mp3" id="submit_sound" preload=""></audio>
+    
+    <script src="js/idangerous.swiper.js"></script>
+    <script src="js/gyyx_wxshare.min.js"></script>    
+    <script src="js/index.js"></script>
+    <script>
+        var par = decodeURIComponent(window.location.search),
+                sOpenId = getQuery("OpenId", par),
+                sTime = getQuery("time", par),
+                sSign = getQuery("sign", par);
+        window.onload = function () {
+            /*领取红包*/
+            $('.js_submit').click(function () {
+                $("#submit_sound")[0].play();
+                $.ajax({
+                    url: 'http://action.gyyx.cn/WeiXinReservation/GetReceiveRedPack',
+                    type: 'GET',
+                    beforeSend: function () {
+
+                    },
+                    data: {
+                        hdName: 'R式卡牌《绝世武神》',
+                        OpenId: sOpenId,
+                        time: sTime,
+                        sign: sSign
+                    },
+                    success: function (d) {
+                        if (d.IsSuccess) {
+                            alert(d.Message)
+                        } else {
+                            alert(d.Message)
+                        }
+                    }
+                })
+            });
+        }        
+        /*微信分享*/
+        wxShare({
+            debug: false,
+            game: "SYJsws",
+            title: "R式卡牌《绝世武神》手游，疯狂派送泡妞经费！转发立刻领取现金红包",
+            desc: "R式卡牌《绝世武神》手游，疯狂派送泡妞经费！转发立刻领取现金红包",
+            link: "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1bfc96e136d113e6&redirect_uri=http%3a%2f%2faction.gyyx.cn%2fWebAuthorize%2fWeiXinAuth.ashx&response_type=code&scope=snsapi_base&state=341#wechat_redirect",
+            imgUrl: "http://action.gyyx.cn/WeiXinReservation/image/1.jpg",
+            success: function () {
+                $.ajax({
+                    url: 'http://action.gyyx.cn/WeiXinReservation/AddShareLog',
+                    type: 'GET',
+                    data: {
+                        hdName: 'R式卡牌《绝世武神》',
+                        OpenId: sOpenId,
+                        time: sTime,
+                        sign: sSign
+                    },
+                    success: function (d) {
+                        alert(d.Message)
+
+                    }
+                })
+
+            },
+            cancel: function () {
+                //alert("取消了分享:(");
+            }
+        });
+        function getQuery(name, str){
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"),
+                r = !str ? window.location.search.substr(1).match(reg) : str.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+    </script>
+</body>
+
+</html>
